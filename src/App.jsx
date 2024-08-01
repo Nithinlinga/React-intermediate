@@ -1,18 +1,18 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [formData,setFormData] = useState({firstname:"",lastname:"",email:"",mobile:""})
+  const [formData,setFormData] = useState({firstname:"",lastname:"",email:"",mobile:"",isvisible:true});
+  console.log(formData );
   function handleChange(event){
+    const {name, value,checked,type}=event.target;
     console.log(event.target.value);
     setFormData(prevData=>{
       return {
         ...prevData,
-        [event.target.name]:event.target.value
+        [name]:type=="checkbox"?checked:value
       }
-    })
+    });
   }
   return (
     <>
@@ -21,19 +21,25 @@ function App() {
           <input type="text" className='block' 
           placeholder='Enter name'
           name='firstname'
-          onAbort={handleChange}/>
+          onChange={handleChange}/>
           <input type="text" className='block'
           placeholder='Enter lastname'
           name='lastname'
-          onAbort={handleChange}/>
-          <input type="text" className=''
+          onChange={handleChange}/>
+          <input type="text" className=' block'
           placeholder='Enter email'
           name='email'
-          onAbort={handleChange}/>
+          onChange={handleChange}/>
           <input type="text" className='block' 
           placeholder='Enter mobile'
           name='mobile'
-          onAbort={handleChange}/>
+          onChange={handleChange}/>
+          <input type="checkbox"
+          name='isvisible' 
+          id='isvisible'
+          onChange={handleChange}
+          checked={formData.isvisible} />
+          <label htmlFor="isvisible">Am I visible</label>
         </form>
       </div>
       <div className=' '></div>
